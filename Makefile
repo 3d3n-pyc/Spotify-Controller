@@ -10,12 +10,14 @@ SRC             =       ${wildcard src/*.c}
 
 OBJ             =       ${SRC:.c=.o}
 
+FLAGS		  	=       -lreadline
+
 EXTRA_FLAGS     =       -Wall -Werror -Wextra
 
 all:    build
 
 build:  ${OBJ}
-	gcc -o ${NAME} ${OBJ} ${EXTRA_FLAGS}
+	gcc -o ${NAME} ${OBJ} ${FLAGS} ${EXTRA_FLAGS}
 
 valgrind:  ${OBJ}
 	gcc -o ${NAME} ${OBJ} ${EXTRA_FLAGS} -g
