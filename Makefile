@@ -12,15 +12,12 @@ OBJ             =       ${SRC:.c=.o}
 
 FLAGS		  	=       -lreadline
 
-EXTRA_FLAGS     =       -Wall -Werror -Wextra
+CFLAGS     =       -Wall -Werror -Wextra
 
 all:    build
 
 build:  ${OBJ}
-	gcc -o ${NAME} ${OBJ} ${FLAGS} ${EXTRA_FLAGS}
-
-valgrind:  ${OBJ}
-	gcc -o ${NAME} ${OBJ} ${EXTRA_FLAGS} -g
+	gcc -o ${NAME} ${OBJ} ${FLAGS}
 
 clean:
 	rm -f ${OBJ}
@@ -28,4 +25,10 @@ clean:
 fclean: clean
 	rm -f ${NAME}
 
+debug: fclean
+debug: CFLAGS += -g
+debug: build
+
 re:	fclean  build
+
+.POETRY: all build clean fclean debug re

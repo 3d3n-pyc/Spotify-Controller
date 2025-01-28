@@ -14,7 +14,7 @@ int str_to_nbr(char *str)
 
     if (str == NULL)
         return -1;
-    for (; *str; *str++) {
+    for (; *str; str++) {
         if (*str < '0' || *str > '9')
             return -1;
         result = result * 10 + *str - '0';
@@ -56,11 +56,22 @@ char *time_to_str(int time)
 {
     int seconds = time % 60;
     int minutes = (time / 60) % 60;
-    char *result = malloc(sizeof(char) * 9);
+    char *seconds_str;
+    char *minutes_str;
+    char *temp;
+    char *result;
 
-    if (result == NULL)
-        return NULL;
-    return concat_three(num_to_str(minutes), ":", num_to_str(seconds));
+    seconds_str = num_to_str(seconds);
+    minutes_str = num_to_str(minutes);
+    if (strlen(seconds_str) == 1) {
+        temp = concat_three("0", seconds_str, "");
+        free(seconds_str);
+        seconds_str = temp;
+    }
+    result = concat_three(minutes_str, ":", seconds_str);
+    free(seconds_str);
+    free(minutes_str);
+    return result;
 }
 
 int send_instruction(char *instruction)
@@ -72,4 +83,5 @@ int send_instruction(char *instruction)
     if (command == NULL)
         return 84;
     system(command);
+    return 0;
 }

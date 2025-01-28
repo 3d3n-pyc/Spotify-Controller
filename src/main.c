@@ -50,9 +50,19 @@ int check_prev(char *str)
 
 int check_current(char *str)
 {
-    if (!strncmp(str, "current", 8) == 0)
+    char *song;
+    char *artist;
+    char *length;
+
+    if (!strncmp(str, "current", 7) == 0)
         return 0;
-    printf("\033[1;37mEn train de jouer \033[1;32m%s \033[1;37mpar \033[1;32m%s \033[0;37m(%s)\033[1;37m.\n", get_current_song(), get_current_artist(), get_current_length());
+    song = get_current_song();
+    artist = get_current_artist();
+    length = get_current_length();
+    printf("\033[1;37mEn train de jouer \033[1;32m%s \033[1;37mpar \033[1;32m%s \033[0;37m(%s)\033[1;37m.\n", song, artist, length);
+    free(song);
+    free(artist);
+    free(length);
     return 1;
 }
 
@@ -73,7 +83,7 @@ int check(char *str)
     return 84;
 }
 
-int main(int ac, char **av) {
+int main(void) {
     char *input;
     int result = 0;
 
@@ -90,6 +100,8 @@ int main(int ac, char **av) {
         }
         free(input);
     }
-
+    free(input);
+    rl_cleanup_after_signal();
+    rl_clear_history();
     return 0;
 }
