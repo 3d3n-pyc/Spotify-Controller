@@ -1,6 +1,9 @@
 name: Create Release
 
-on: [push]
+on:
+  push:
+    tags:
+      - 'v*.*.*'
 
 permissions:
   contents: write
@@ -20,6 +23,10 @@ jobs:
     - name: Build project
       run: make
 
+    - name: Extract version from tag
+      id: extract_version
+      run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
     - name: Create release
       id: create_release
       uses: actions/create-release@v1
@@ -27,7 +34,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ github.ref }}
-        release_name: Spotify Controller ${{ github.ref }}
+        release_name: Spotify Controller ${{ env.VERSION }}
         body: |
           > [!WARNING]
           > Only working on linux
