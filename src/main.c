@@ -4,15 +4,15 @@
 ** main
 */
 
+#include "get_data.h"
+#include "utils.h"
+#include "commands.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 #include <readline/readline.h>
-#include "../includes/get_data.h"
-#include "../includes/utils.h"
-#include "../includes/commands.h"
 
-int check_play(char *str)
+static int check_play(char *str)
 {
     if (!strncmp(str, "play", 4) == 0)
         return 0;
@@ -21,7 +21,7 @@ int check_play(char *str)
     return 1;
 }
 
-int check_pause(char *str)
+static int check_pause(char *str)
 {
     if (!strncmp(str, "pause", 5) == 0)
         return 0;
@@ -30,7 +30,7 @@ int check_pause(char *str)
     return 1;
 }
 
-int check_next(char *str)
+static int check_next(char *str)
 {
     if (!strncmp(str, "next", 4) == 0)
         return 0;
@@ -39,7 +39,7 @@ int check_next(char *str)
     return 1;
 }
 
-int check_prev(char *str)
+static int check_prev(char *str)
 {
     if (!strncmp(str, "prev", 4) == 0)
         return 0;
@@ -48,7 +48,7 @@ int check_prev(char *str)
     return 1;
 }
 
-int check_current(char *str)
+static int check_current(char *str)
 {
     char *song;
     char *artist;
@@ -83,12 +83,12 @@ int check(char *str)
     return 84;
 }
 
-int main(void) {
+int terminal(void)
+{
     char *input;
     int result = 0;
 
     initialize_readline();
-
     while ((input = readline("\033[0mspotify> ")) != NULL) {
         if (strlen(input) > 0) {
             add_history(input);
@@ -104,4 +104,14 @@ int main(void) {
     rl_cleanup_after_signal();
     rl_clear_history();
     return 0;
+}
+
+int main(int ac, char **av)
+{
+    if (ac == 1)
+        return terminal();
+    for (int i = 1; i < ac; i++) {
+        if (check(av[i]) == 84)
+            return 84;
+    }
 }

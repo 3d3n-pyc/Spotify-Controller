@@ -7,6 +7,17 @@
 #ifndef COMMANDS_H_
     #define COMMANDS_H_
 
+
+const char *commands[] = {
+    "play",
+    "pause",
+    "next",
+    "prev",
+    "current",
+    "exit",
+    NULL
+};
+
 char *command_generator(const char *text, int state);
 char **command_completion(const char *text, int start, int end);
 void initialize_readline(void);

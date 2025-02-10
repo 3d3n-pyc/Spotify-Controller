@@ -4,10 +4,10 @@
 ** get_data
 */
 
+#include "utils.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "../includes/utils.h"
 
 char *get_current_length(void)
 {
