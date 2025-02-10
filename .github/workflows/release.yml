@@ -1,9 +1,6 @@
 name: Create Release
 
-on:
-  push:
-    tags:
-      - 'v*.*.*'
+on: [push]
 
 jobs:
   build:
@@ -27,6 +24,9 @@ jobs:
       with:
         tag_name: ${{ github.ref }}
         release_name: Spotify Controller ${{ github.ref }}
+        body: |
+          > [!WARNING]
+          > Only working on linux
         draft: false
         prerelease: false
 
