@@ -12,7 +12,7 @@ OBJ             =       ${SRC:.c=.o}
 
 FLAGS		  	=       -lreadline
 
-CFLAGS     =       -Wall -Werror -Wextra
+CFLAGS     =       -Wall -Werror -Wextra -Iincludes
 
 all:    build
 

@@ -1,0 +1,15 @@
+USAGE
+    spotify [OPTIONS] [SUBCOMMANDS]
+
+DESCRIPTION
+    A command-line tool to control Spotify playback.
+
+OPTIONS
+    -h, --help       Prints help information
+
+SUBCOMMANDS
+    play    Play the current track
+    pause   Pause the current track
+    next    Play the next track
+    prev    Play the previous track
+    current Show the current track

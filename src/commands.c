@@ -8,19 +8,28 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+const char *commands[] = {
+    "play",
+    "pause",
+    "next",
+    "prev",
+    "current",
+    "exit",
+    NULL
+};
+
 char *command_generator(const char *text, int state)
 {
     static int list_index;
     static int len;
-    char *name;
 
     if (!state) {
         list_index = 0;
         len = strlen(text);
     }
-    while ((name = commands[list_index++])) {
-        if (strncmp(name, text, len) == 0) {
-            return strdup(name);
+    while (commands[list_index++]) {
+        if (strncmp(commands[list_index - 1], text, len) == 0) {
+            return strdup(commands[list_index - 1]);
         }
     }
     return NULL;

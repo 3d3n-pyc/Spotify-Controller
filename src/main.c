@@ -106,10 +106,23 @@ int terminal(void)
     return 0;
 }
 
+static int is_help(char **av)
+{
+    for (int i = 0; av[i]; i++) {
+        if (strcmp(av[i], "-h") == 0 || strcmp(av[i], "--help") == 0)
+            return 1;
+    }
+    return 0;
+}
+
 int main(int ac, char **av)
 {
     if (ac == 1)
         return terminal();
+    if (is_help(av) == 1) {
+        cat_file("HELP");
+        return 0;
+    }
     for (int i = 1; i < ac; i++) {
         if (check(av[i]) == 84)
             return 84;
