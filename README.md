@@ -16,7 +16,7 @@ Spotify Controller is a command-line tool to control Spotify playback using DBus
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/spotify-controller.git
+    git clone https://github.com/3d3n-pyc/spotify-controller.git
     cd spotify-controller
     ```
 
